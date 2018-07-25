@@ -5,7 +5,7 @@ namespace Runningtap
     [System.Serializable]
     public class LevelTile : MonoBehaviour
     {
-        public GameObject prefab;
-        public Color color;
+        public GameObject Prefab;
+        public Color Color;
     }
 }

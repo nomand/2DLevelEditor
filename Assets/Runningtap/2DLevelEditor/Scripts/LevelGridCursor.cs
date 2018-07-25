@@ -9,18 +9,20 @@ namespace Runningtap
         public delegate void OnTilePlacement(Vector3 position);
         public static OnTilePlacement TilePlacement;
 
-        public GameObject gridCursor;
+        public GameObject CursorVisual;
         public Camera LevelEditorCamera;
-        LevelGrid grid;
-        RaycastHit hit;
-        Ray ray;
+
+        private LevelGrid grid;
+        private RaycastHit hit;
+        private Ray ray;
 
         private void Start()
         {
             grid = GetComponent<LevelGrid>();
+            cursorParticle = CursorVisual.GetComponent<ParticleSystem>();
 
-            gridCursor = Instantiate(gridCursor, transform);
-            gridCursor.SetActive(false);
+            CursorVisual = Instantiate(CursorVisual, transform);
+            CursorVisual.SetActive(false);
         }
 
         void Update()
@@ -29,10 +31,10 @@ namespace Runningtap
 
             if(Physics.Raycast(ray, out hit))
             {
-                gridCursor.SetActive(true);
+                CursorVisual.SetActive(true);
                 UpdateCursor(hit.point);
 
-                if(Input.GetMouseButtonDown(0))
+                if(Input.GetMouseButton(0))
                 {
                     if (TilePlacement != null)
                         TilePlacement(grid.GetNearestPointOnGrid(hit.point));
@@ -40,13 +42,13 @@ namespace Runningtap
             }
             else
             {
-                gridCursor.SetActive(false);
+                CursorVisual.SetActive(false);
             }
         }
 
         void UpdateCursor(Vector3 position)
         {
-            gridCursor.transform.position = grid.GetNearestPointOnGrid(position);
+            CursorVisual.transform.position = grid.GetNearestPointOnGrid(position);
         }
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -996,7 +996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12686d92d02107042a82ccd4ca908f5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraDragSpeed: 40
+  CameraDragSpeed: 50
 --- !u!114 &1485014125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1008,7 +1008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9ace57f62522c428fb4e40ad09fee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 2094434920}
+  Grid: {fileID: 2094434920}
 --- !u!20 &1485014126
 Camera:
   m_ObjectHideFlags: 0
@@ -1086,7 +1086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce97e1935a7b2ed4297a28efb49c3235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 2094434924}
+  Grid: {fileID: 2094434924}
 --- !u!114 &1718448441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1099,7 +1099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Level: {fileID: 1718448438}
-  tiles:
+  Tiles:
   - {fileID: 1211237939174074, guid: 4c2de571e1ff86f48a3765e65ea00521, type: 2}
   - {fileID: 1211237939174074, guid: afc6f110a5fad0943ab4c6c8682448c3, type: 2}
   - {fileID: 1211237939174074, guid: 65d17fd66d9e5744988a108b1e675562, type: 2}
@@ -1229,7 +1229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82dcf761f99d1784ebea18379c7cc71d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridLines: {fileID: 1836450225460586, guid: 7d5a8a8e1b4b535499ed66cfda7b9792, type: 2}
+  GridTemplatePrefab: {fileID: 1836450225460586, guid: 7d5a8a8e1b4b535499ed66cfda7b9792,
+    type: 2}
   newGrid: {fileID: 0}
 --- !u!4 &2094434922
 Transform:
@@ -1255,7 +1256,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3d4b0e2ff30a247ae3ba2c6972297e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridCursor: {fileID: 1836450225460586, guid: 04107c67a1305c24b801be84b07c2f38, type: 2}
+  CursorVisual: {fileID: 1836450225460586, guid: 04107c67a1305c24b801be84b07c2f38,
+    type: 2}
   LevelEditorCamera: {fileID: 1485014126}
 --- !u!114 &2094434924
 MonoBehaviour:
@@ -1268,4 +1270,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e37766db47f2e41ae41a3dc80182cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 12
+  size: 10

@@ -6,11 +6,12 @@ namespace Runningtap
 {
     public class CameraClickDrag : MonoBehaviour
     {
-        public int cameraDragSpeed = 50;
-        float currentZoom;
-        bool isDragging;
-        CameraRubberBand rubberBand;
-        Vector3 lastValidPosition;
+        public int CameraDragSpeed = 50;
+
+        private float currentZoom;
+        private bool isDragging;
+        private CameraRubberBand rubberBand;
+        private Vector3 lastValidPosition;
 
         private void Start()
         {
@@ -24,28 +25,14 @@ namespace Runningtap
                 lastValidPosition = transform.position;
             }
 
-            if (Input.GetMouseButton(1))
-            {
-                isDragging = true;
-            }
-            else
-            {
-                isDragging = false;
-            }
-        }
-
-        void doZoom()
-        {
-            currentZoom = Camera.main.orthographicSize;
-            var newZoom = Mathf.Clamp(currentZoom - Input.GetAxis("Mouse ScrollWheel") * cameraDragSpeed / 2, 1, 20);
-            Camera.main.orthographicSize = Mathf.Lerp(currentZoom, newZoom, Time.deltaTime * 10f);
+            isDragging = Input.GetMouseButton(1) ? true : false;
         }
 
         private void LateUpdate()
         {
             if(isDragging)
             {
-                float speed = cameraDragSpeed * Time.deltaTime;
+                float speed = CameraDragSpeed * Time.deltaTime;
                 transform.position -= new Vector3(Input.GetAxis("Mouse X") * speed, Input.GetAxis("Mouse Y") * speed, 0f);
             }
             else if(rubberBand.CheckOutOfBounds())
@@ -54,6 +41,13 @@ namespace Runningtap
             }
 
             doZoom();
+        }
+
+        private void doZoom()
+        {
+            currentZoom = Camera.main.orthographicSize;
+            var newZoom = Mathf.Clamp(currentZoom - Input.GetAxis("Mouse ScrollWheel") * CameraDragSpeed / 2, 1, 20);
+            Camera.main.orthographicSize = Mathf.Lerp(currentZoom, newZoom, Time.deltaTime * 10f);
         }
     }
 }

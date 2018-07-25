@@ -6,7 +6,7 @@ namespace Runningtap
 {
     public class CameraRubberBand : MonoBehaviour
     {
-        public GameObject grid;
+        public GameObject Grid;
 
         private GameObject gridVisual;
         private Bounds gridBounds;
@@ -16,7 +16,7 @@ namespace Runningtap
 
         private void Start()
         {
-            gridVisual = grid.GetComponent<LevelGridVisual>().newGrid;
+            gridVisual = Grid.GetComponent<LevelGridVisual>().newGrid;
             gridBounds = gridVisual.GetComponent<Collider>().bounds;
             half = gridBounds.extents;
         }

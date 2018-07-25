@@ -9,7 +9,7 @@ namespace Runningtap
     public class LevelTileSelectorTest : MonoBehaviour
     {
         public GameObject Level;
-        public GameObject[] tiles;
+        public GameObject[] Tiles;
 
         private LevelData levelData;
         private int currentSelection;
@@ -36,7 +36,7 @@ namespace Runningtap
 
         bool IsCellEmpty(Vector3 position)
         {
-            if (levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] == Vector3.zero) return true; else return false;
+            return (levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] == Vector3.zero) ? true : false;
         }
 
         public void PlaceTile(Vector3 position)
@@ -44,7 +44,7 @@ namespace Runningtap
             if (IsCellEmpty(position))
             {
                 levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] = position;
-                Instantiate(tiles[currentSelection], position, Quaternion.identity, Level.transform);
+                Instantiate(Tiles[currentSelection], position, Quaternion.identity, Level.transform);
             }
         }
     }

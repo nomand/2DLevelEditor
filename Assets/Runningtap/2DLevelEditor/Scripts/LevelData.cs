@@ -7,11 +7,11 @@ namespace Runningtap
     public class LevelData : MonoBehaviour
     {
         public Vector3[][] xy;
-        public LevelGrid grid;
+        public LevelGrid Grid;
 
         private void Start()
         {
-            CreateCoordingates(grid.resolution);
+            CreateCoordingates(Grid.resolution);
         }
 
         void CreateCoordingates(int resolution)

@@ -6,14 +6,14 @@ namespace Runningtap
 {
     public class LevelGridVisual : MonoBehaviour
     {
-        public GameObject gridLines;
+        public GameObject GridTemplatePrefab;
 
         [HideInInspector]
         public GameObject newGrid;
 
         public void UpdateGridVisual(float size)
         {
-            newGrid = Instantiate(gridLines, transform, true) as GameObject;
+            newGrid = Instantiate(GridTemplatePrefab, transform) as GameObject;
 
             newGrid.transform.localScale *= size;
             newGrid.GetComponent<Renderer>().material.SetTextureScale("_MainTex", new Vector2(size, size));
