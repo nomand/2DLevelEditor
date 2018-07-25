@@ -7,7 +7,13 @@ namespace Runningtap
     public class LevelGrid : MonoBehaviour
     {
         [SerializeField]
-        private float size = 1f;
+        private int size = 1;
+
+        public int resolution
+        {
+            get { return size; }
+            set { resolution = value; }
+        }
 
         private void Awake()
         {
@@ -24,18 +30,5 @@ namespace Runningtap
 
             return new Vector3((float)xCount, (float)yCount, (float)zCount) + transform.position;
         }
-
-        //private void OnDrawGizmos()
-        //{
-        //    Gizmos.color = Color.yellow;
-        //    for (float x = 0; x < size; x ++)
-        //    {
-        //        for (float y = 0; y < size; y ++)
-        //        {
-        //            var point = GetNearestPointOnGrid(new Vector3(x, y, 0f));
-        //            Gizmos.DrawSphere(point, 0.1f);
-        //        }
-        //    }
-        //}
     }
 }
