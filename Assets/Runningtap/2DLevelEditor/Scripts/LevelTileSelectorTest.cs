@@ -11,7 +11,13 @@ namespace Runningtap
         public GameObject Level;
         public GameObject[] tiles;
 
+        private LevelData levelData;
         private int currentSelection;
+
+        private void Start()
+        {
+            levelData = GetComponent<LevelData>();
+        }
 
         private void OnEnable()
         {
@@ -28,9 +34,18 @@ namespace Runningtap
             currentSelection = index;
         }
 
-        void PlaceTile(Vector3 position)
+        bool IsCellEmpty(Vector3 position)
         {
-            Instantiate(tiles[currentSelection], position, Quaternion.identity, Level.transform);
+            if (levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] == Vector3.zero) return true; else return false;
+        }
+
+        public void PlaceTile(Vector3 position)
+        {
+            if (IsCellEmpty(position))
+            {
+                levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] = position;
+                Instantiate(tiles[currentSelection], position, Quaternion.identity, Level.transform);
+            }
         }
     }
 }

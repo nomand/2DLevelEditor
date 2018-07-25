@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -286,7 +286,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2094434925}
+      - m_Target: {fileID: 1718448441}
         m_MethodName: SelectTile
         m_Mode: 3
         m_Arguments:
@@ -448,7 +448,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2094434925}
+      - m_Target: {fileID: 1718448441}
         m_MethodName: SelectTile
         m_Mode: 3
         m_Arguments:
@@ -637,7 +637,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2094434925}
+      - m_Target: {fileID: 1718448441}
         m_MethodName: SelectTile
         m_Mode: 3
         m_Arguments:
@@ -820,7 +820,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2094434925}
+      - m_Target: {fileID: 1718448441}
         m_MethodName: SelectTile
         m_Mode: 3
         m_Arguments:
@@ -941,7 +941,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2094434925}
+      - m_Target: {fileID: 1718448441}
         m_MethodName: SelectTile
         m_Mode: 3
         m_Arguments:
@@ -1053,6 +1053,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1718448439}
+  - component: {fileID: 1718448440}
+  - component: {fileID: 1718448441}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -1073,6 +1075,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1718448440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1718448438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce97e1935a7b2ed4297a28efb49c3235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1718448441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1718448438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c433d8636402d544e9217ab54fbe73ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Level: {fileID: 1718448438}
+  tiles:
+  - {fileID: 1211237939174074, guid: 4c2de571e1ff86f48a3765e65ea00521, type: 2}
+  - {fileID: 1211237939174074, guid: afc6f110a5fad0943ab4c6c8682448c3, type: 2}
+  - {fileID: 1211237939174074, guid: 65d17fd66d9e5744988a108b1e675562, type: 2}
+  - {fileID: 1211237939174074, guid: ece133dd192b4544c8ed2bb2bca8b561, type: 2}
+  - {fileID: 1211237939174074, guid: a244a2670129bc74699eef78377d72a3, type: 2}
 --- !u!1 &1721002322
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,7 +1210,6 @@ GameObject:
   - component: {fileID: 2094434924}
   - component: {fileID: 2094434921}
   - component: {fileID: 2094434923}
-  - component: {fileID: 2094434925}
   m_Layer: 9
   m_Name: Grid
   m_TagString: Untagged
@@ -1238,21 +1268,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 16
---- !u!114 &2094434925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2094434920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c433d8636402d544e9217ab54fbe73ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Level: {fileID: 1718448438}
-  tiles:
-  - {fileID: 1211237939174074, guid: 4c2de571e1ff86f48a3765e65ea00521, type: 2}
-  - {fileID: 1211237939174074, guid: afc6f110a5fad0943ab4c6c8682448c3, type: 2}
-  - {fileID: 1211237939174074, guid: 65d17fd66d9e5744988a108b1e675562, type: 2}
-  - {fileID: 1211237939174074, guid: ece133dd192b4544c8ed2bb2bca8b561, type: 2}
-  - {fileID: 1211237939174074, guid: a244a2670129bc74699eef78377d72a3, type: 2}
