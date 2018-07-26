@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Runningtap
 {
@@ -28,15 +29,19 @@ namespace Runningtap
         {
             ray = LevelEditorCamera.ScreenPointToRay(Input.mousePosition);
 
-            if(Physics.Raycast(ray, out hit))
-            {
-                CursorVisual.SetActive(true);
-                UpdateCursor(hit.point);
 
-                if(Input.GetMouseButton(0))
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                if (Physics.Raycast(ray, out hit))
                 {
-                    if (TilePlacement != null)
-                        TilePlacement(grid.GetNearestPointOnGrid(hit.point));
+                    CursorVisual.SetActive(true);
+                    UpdateCursor(hit.point);
+
+                    if (Input.GetMouseButton(0))
+                    {
+                        if (TilePlacement != null)
+                            TilePlacement(grid.GetNearestPointOnGrid(hit.point));
+                    }
                 }
             }
             else

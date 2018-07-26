@@ -37,9 +37,9 @@ namespace Runningtap
             LevelGridCursor.TilePlacement -= PlaceTile;
         }
 
-        public void SetBrushMode()
+        public void SetBrushMode(int mode)
         {
-            cursorMode = (cursorMode == Mode.Paint) ? Mode.Erase : cursorMode = Mode.Paint;
+            cursorMode = (mode == 0) ? Mode.Paint : Mode.Erase;
         }
 
         public void SelectRune(int index)
