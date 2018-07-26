@@ -14,6 +14,14 @@ namespace Runningtap
         private LevelData levelData;
         private int currentSelection;
 
+        public enum Mode
+        {
+            Paint,
+            Erase
+        }
+        [HideInInspector]
+        public Mode cursorMode = Mode.Paint;
+
         private void Start()
         {
             levelData = GetComponent<LevelData>();
@@ -29,7 +37,12 @@ namespace Runningtap
             LevelGridCursor.TilePlacement -= PlaceTile;
         }
 
-        public void SelectTile(int index)
+        public void SetBrushMode()
+        {
+            cursorMode = (cursorMode == Mode.Paint) ? Mode.Erase : cursorMode = Mode.Paint;
+        }
+
+        public void SelectRune(int index)
         {
             currentSelection = index;
         }
@@ -41,14 +54,22 @@ namespace Runningtap
 
         public void PlaceTile(Vector3 position)
         {
-            if (IsCellEmpty(position))
+            if (cursorMode == Mode.Paint)
             {
-                levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] = Instantiate(Tiles[currentSelection], position, Quaternion.identity, Level.transform);
+                if (IsCellEmpty(position))
+                {
+                    levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] = Instantiate(Tiles[currentSelection], position, Quaternion.identity, Level.transform);
+                }
+                else if (levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] != Tiles[currentSelection])
+                {
+                    Destroy(levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)]);
+                    levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] = Instantiate(Tiles[currentSelection], position, Quaternion.identity, Level.transform);
+                }
             }
-            else if (levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] != Tiles[currentSelection])
+            else
             {
                 Destroy(levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)]);
-                levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] = Instantiate(Tiles[currentSelection], position, Quaternion.identity, Level.transform);
+                levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] = null;
             }
         }
     }
