@@ -14,6 +14,8 @@ namespace Runningtap
         private LevelData levelData;
         private int currentSelection;
 
+        private bool movingTile;
+
         public enum Mode
         {
             Paint,
@@ -60,23 +62,54 @@ namespace Runningtap
 
         public void PlaceTile(Vector3 position)
         {
+            int x = Mathf.RoundToInt(position.x);
+            int y = Mathf.RoundToInt(position.y);
+
             if (cursorMode == Mode.Paint)
             {
                 if (IsCellEmpty(position))
                 {
-                    levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] = Instantiate(Tiles[currentSelection], position, Quaternion.identity, Level.transform);
+                    levelData.xy[x][y] = Instantiate(Tiles[currentSelection], position, Quaternion.identity, Level.transform);
                 }
-                else if (levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] != Tiles[currentSelection])
+                else if (levelData.xy[x][y] != Tiles[currentSelection])
                 {
-                    Destroy(levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)]);
-                    levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] = Instantiate(Tiles[currentSelection], position, Quaternion.identity, Level.transform);
+                    Destroy(levelData.xy[x][y]);
+                    levelData.xy[x][y] = Instantiate(Tiles[currentSelection], position, Quaternion.identity, Level.transform);
                 }
             }
             else if (cursorMode == Mode.Erase)
             {
-                Destroy(levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)]);
-                levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] = null;
+                Destroy(levelData.xy[x][y]);
+                levelData.xy[x][y] = null;
             }
+            else if (cursorMode == Mode.Move && !movingTile)
+            {
+                if (!IsCellEmpty(position))
+                {
+                    StartCoroutine(MoveTile(levelData.xy[x][y], x, y));
+                    levelData.xy[x][y].SetActive(false);
+                }
+            }
+        }
+
+        public IEnumerator MoveTile(GameObject tile, int x, int y)
+        {
+            movingTile = true;
+            while (Input.GetMouseButton(0))
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            int newX = Mathf.RoundToInt(LevelGridCursor.CursorCoordinate.x);
+            int newY = Mathf.RoundToInt(LevelGridCursor.CursorCoordinate.y);
+            tile.SetActive(true);
+            tile.transform.position = new Vector3(newX, newY, transform.position.z);
+            levelData.xy[newX][newY] = tile;
+            levelData.xy[x][y] = null;
+
+            movingTile = false;
+
+            yield return null;
         }
     }
 }
