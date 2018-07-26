@@ -17,7 +17,8 @@ namespace Runningtap
         public enum Mode
         {
             Paint,
-            Erase
+            Erase,
+            Move
         }
         [HideInInspector]
         public Mode cursorMode = Mode.Paint;
@@ -39,7 +40,12 @@ namespace Runningtap
 
         public void SetBrushMode(int mode)
         {
-            cursorMode = (mode == 0) ? Mode.Paint : Mode.Erase;
+            if (mode == 0)
+                cursorMode = Mode.Paint;
+            else if (mode == 1)
+                cursorMode = Mode.Erase;
+            else if (mode == 2)
+                cursorMode = Mode.Move;
         }
 
         public void SelectRune(int index)
@@ -66,7 +72,7 @@ namespace Runningtap
                     levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] = Instantiate(Tiles[currentSelection], position, Quaternion.identity, Level.transform);
                 }
             }
-            else
+            else if (cursorMode == Mode.Erase)
             {
                 Destroy(levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)]);
                 levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] = null;

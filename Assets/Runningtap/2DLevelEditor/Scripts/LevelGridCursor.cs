@@ -29,7 +29,6 @@ namespace Runningtap
         {
             ray = LevelEditorCamera.ScreenPointToRay(Input.mousePosition);
 
-
             if (!EventSystem.current.IsPointerOverGameObject())
             {
                 if (Physics.Raycast(ray, out hit))
