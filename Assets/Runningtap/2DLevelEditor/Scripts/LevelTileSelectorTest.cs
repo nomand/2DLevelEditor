@@ -36,15 +36,19 @@ namespace Runningtap
 
         bool IsCellEmpty(Vector3 position)
         {
-            return (levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] == Vector3.zero) ? true : false;
+            return (levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] == null) ? true : false;
         }
 
         public void PlaceTile(Vector3 position)
         {
             if (IsCellEmpty(position))
             {
-                levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] = position;
-                Instantiate(Tiles[currentSelection], position, Quaternion.identity, Level.transform);
+                levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] = Instantiate(Tiles[currentSelection], position, Quaternion.identity, Level.transform);
+            }
+            else if (levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] != Tiles[currentSelection])
+            {
+                Destroy(levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)]);
+                levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] = Instantiate(Tiles[currentSelection], position, Quaternion.identity, Level.transform);
             }
         }
     }

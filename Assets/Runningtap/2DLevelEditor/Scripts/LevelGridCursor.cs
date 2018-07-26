@@ -19,7 +19,6 @@ namespace Runningtap
         private void Start()
         {
             grid = GetComponent<LevelGrid>();
-            cursorParticle = CursorVisual.GetComponent<ParticleSystem>();
 
             CursorVisual = Instantiate(CursorVisual, transform);
             CursorVisual.SetActive(false);
