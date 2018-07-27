@@ -15,11 +15,12 @@ namespace Runningtap
         {
             newGrid = Instantiate(GridTemplatePrefab, transform) as GameObject;
 
-            float offset = (x % 2 == 0) ? 0.5f : 0f;
+            float offsetx = (x % 2 == 0) ? 0.5f : 0f;
+            float offsety = (y % 2 == 0) ? 0.5f : 0f;
 
             newGrid.transform.localScale = new Vector3(x, y, 1);
             newGrid.GetComponent<Renderer>().material.SetTextureScale("_MainTex", new Vector2(x, y));
-            newGrid.transform.position = new Vector3(transform.position.x + (x / 2) - offset, transform.position.y + (y / 2) - offset, 0f);
+            newGrid.transform.position = new Vector3(transform.position.x + (x / 2) - offsetx, transform.position.y + (y / 2) - offsety, 0f);
         }
     }
 }

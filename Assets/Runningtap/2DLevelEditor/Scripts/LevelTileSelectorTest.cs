@@ -9,7 +9,7 @@ namespace Runningtap
     public class LevelTileSelectorTest : MonoBehaviour
     {
         public GameObject Level;
-        public GameObject[] Tiles;
+        public GameObject[] TilePallete;
 
         private LevelData levelData;
         private int currentSelection;
@@ -55,6 +55,17 @@ namespace Runningtap
             currentSelection = index;
         }
 
+        public void ClearGrid()
+        {
+            foreach(GameObject[] x in levelData.xy)
+            {
+                foreach(GameObject y in x)
+                {
+                    Destroy(y);
+                }
+            }
+        }
+
         bool IsCellEmpty(int x, int y)
         {
             return (levelData.xy[x][y] == null) ? true : false;
@@ -69,12 +80,12 @@ namespace Runningtap
             {
                 if (IsCellEmpty(x, y))
                 {
-                    levelData.xy[x][y] = Instantiate(Tiles[currentSelection], position, Quaternion.identity, Level.transform);
+                    levelData.xy[x][y] = Instantiate(TilePallete[currentSelection], position, Quaternion.identity, Level.transform);
                 }
-                else if (levelData.xy[x][y] != Tiles[currentSelection])
+                else if (levelData.xy[x][y] != TilePallete[currentSelection])
                 {
                     Destroy(levelData.xy[x][y]);
-                    levelData.xy[x][y] = Instantiate(Tiles[currentSelection], position, Quaternion.identity, Level.transform);
+                    levelData.xy[x][y] = Instantiate(TilePallete[currentSelection], position, Quaternion.identity, Level.transform);
                 }
             }
             else if (cursorMode == Mode.Erase)

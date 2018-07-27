@@ -7,10 +7,6 @@ namespace Runningtap
     public class LevelGrid : MonoBehaviour
     {
         [SerializeField]
-        private int size = 1;
-        public int Resolution { get { return size; } set { size = value; } }
-
-        [SerializeField]
         private int x, y;
 
         public int X { get { return x; } set { x = value; } }

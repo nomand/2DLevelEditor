@@ -45,6 +45,10 @@ namespace Runningtap
                             TilePlacement(grid.GetNearestPointOnGrid(hit.point));
                     }
                 }
+                else
+                {
+                    CursorVisual.SetActive(false);
+                }
             }
             else
             {

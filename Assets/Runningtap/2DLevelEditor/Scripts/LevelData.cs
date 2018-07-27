@@ -11,7 +11,7 @@ namespace Runningtap
 
         private void Start()
         {
-            CreateEmptyCoordingates(Grid.Resolution, Grid.Resolution);
+            CreateEmptyCoordingates(Grid.X, Grid.Y);
         }
 
         public void CreateEmptyCoordingates(int x, int y)
