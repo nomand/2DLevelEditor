@@ -1954,5 +1954,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e37766db47f2e41ae41a3dc80182cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 10
-  y: 5
+  x: 18
+  y: 11
+  Debug: 1

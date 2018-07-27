@@ -9,6 +9,8 @@ namespace Runningtap
         [SerializeField]
         private int x, y;
 
+        public bool Debug;
+
         public int X { get { return x; } set { x = value; } }
         public int Y { get { return y; } set { y = value; } }
 
@@ -21,11 +23,26 @@ namespace Runningtap
         {
             position -= transform.position;
 
-            int xCount = Mathf.RoundToInt(position.x);
-            int yCount = Mathf.RoundToInt(position.y);
-            int zCount = Mathf.RoundToInt(position.z);
+            int x = Mathf.RoundToInt(position.x);
+            int y = Mathf.RoundToInt(position.y);
+            int z = Mathf.RoundToInt(position.z);
 
-            return new Vector3((float)xCount, (float)yCount, (float)zCount) + transform.position;
+            return new Vector3(x, y, z) + transform.position;
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (Debug)
+            {
+                for (int i = 0; i < x; i++)
+                {
+                    for (int j = 0; j < y; j++)
+                    {
+                        var point = GetNearestPointOnGrid(new Vector3(i, j, 0f));
+                        Gizmos.DrawWireCube(point, new Vector3(0.9f, 0.9f, 0f));
+                    }
+                }
+            }
         }
     }
 }

@@ -10,8 +10,6 @@ namespace Runningtap
 
         private GameObject gridVisual;
         private Bounds gridBounds;
-        private float x;
-        private float y;
         private Vector3 half;
 
         private void Start()
