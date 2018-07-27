@@ -55,9 +55,9 @@ namespace Runningtap
             currentSelection = index;
         }
 
-        bool IsCellEmpty(Vector3 position)
+        bool IsCellEmpty(int x, int y)
         {
-            return (levelData.xy[Mathf.RoundToInt(position.x)][Mathf.RoundToInt(position.y)] == null) ? true : false;
+            return (levelData.xy[x][y] == null) ? true : false;
         }
 
         public void PlaceTile(Vector3 position)
@@ -67,7 +67,7 @@ namespace Runningtap
 
             if (cursorMode == Mode.Paint)
             {
-                if (IsCellEmpty(position))
+                if (IsCellEmpty(x, y))
                 {
                     levelData.xy[x][y] = Instantiate(Tiles[currentSelection], position, Quaternion.identity, Level.transform);
                 }
@@ -84,7 +84,7 @@ namespace Runningtap
             }
             else if (cursorMode == Mode.Move && !movingTile)
             {
-                if (!IsCellEmpty(position))
+                if (!IsCellEmpty(x, y))
                 {
                     StartCoroutine(MoveTile(levelData.xy[x][y], x, y));
                     levelData.xy[x][y].SetActive(false);
@@ -95,21 +95,30 @@ namespace Runningtap
         public IEnumerator MoveTile(GameObject tile, int x, int y)
         {
             movingTile = true;
+
             while (Input.GetMouseButton(0))
             {
                 yield return new WaitForEndOfFrame();
             }
 
-            int newX = Mathf.RoundToInt(LevelGridCursor.CursorCoordinate.x);
-            int newY = Mathf.RoundToInt(LevelGridCursor.CursorCoordinate.y);
-            tile.SetActive(true);
-            tile.transform.position = new Vector3(newX, newY, transform.position.z);
-            levelData.xy[newX][newY] = tile;
-            levelData.xy[x][y] = null;
+            if (!IsCellEmpty(LevelGridCursor.CursorCurrentX, LevelGridCursor.CursorCurrentY))
+            {
+                levelData.xy[x][y].SetActive(true);
+                movingTile = false;
+                yield return null;
+            }
+            else
+            {
+                int newX = LevelGridCursor.CursorCurrentX;
+                int newY = LevelGridCursor.CursorCurrentY;
+                tile.SetActive(true);
+                tile.transform.position = new Vector3(newX, newY, transform.position.z);
+                levelData.xy[newX][newY] = tile;
+                levelData.xy[x][y] = null;
 
-            movingTile = false;
-
-            yield return null;
+                movingTile = false;
+                yield return null;
+            }
         }
     }
 }

@@ -8,16 +8,17 @@ namespace Runningtap
     {
         [SerializeField]
         private int size = 1;
+        public int Resolution { get { return size; } set { size = value; } }
 
-        public int resolution
-        {
-            get { return size; }
-            set { resolution = value; }
-        }
+        [SerializeField]
+        private int x, y;
+
+        public int X { get { return x; } set { x = value; } }
+        public int Y { get { return y; } set { y = value; } }
 
         private void Awake()
         {
-            GetComponent<LevelGridVisual>().UpdateGridVisual(size);
+            GetComponent<LevelGridVisual>().UpdateGridVisual(x, y);
         }
 
         public Vector3 GetNearestPointOnGrid(Vector3 position)

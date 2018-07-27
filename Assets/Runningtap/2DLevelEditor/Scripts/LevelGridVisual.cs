@@ -11,13 +11,15 @@ namespace Runningtap
         [HideInInspector]
         public GameObject newGrid;
 
-        public void UpdateGridVisual(float size)
+        public void UpdateGridVisual(int x, int y)
         {
             newGrid = Instantiate(GridTemplatePrefab, transform) as GameObject;
 
-            newGrid.transform.localScale *= size;
-            newGrid.GetComponent<Renderer>().material.SetTextureScale("_MainTex", new Vector2(size, size));
-            newGrid.transform.position = new Vector3(transform.position.x + (size / 2) - 0.5f, transform.position.y + (size / 2) - 0.5f, 0f);
+            float offset = (x % 2 == 0) ? 0.5f : 0f;
+
+            newGrid.transform.localScale = new Vector3(x, y, 1);
+            newGrid.GetComponent<Renderer>().material.SetTextureScale("_MainTex", new Vector2(x, y));
+            newGrid.transform.position = new Vector3(transform.position.x + (x / 2) - offset, transform.position.y + (y / 2) - offset, 0f);
         }
     }
 }

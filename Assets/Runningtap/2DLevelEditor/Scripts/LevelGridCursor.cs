@@ -10,7 +10,8 @@ namespace Runningtap
         public delegate void OnTilePlacement(Vector3 position);
         public static OnTilePlacement TilePlacement;
 
-        public static Vector2 CursorCoordinate;
+        public static int CursorCurrentX;
+        public static int CursorCurrentY;
 
         public GameObject CursorVisual;
         public Camera LevelEditorCamera;
@@ -53,8 +54,9 @@ namespace Runningtap
 
         void UpdateCursor(Vector3 position)
         {
-            CursorCoordinate = grid.GetNearestPointOnGrid(position);
-            CursorVisual.transform.position = CursorCoordinate;
+            CursorCurrentX = Mathf.RoundToInt(grid.GetNearestPointOnGrid(position).x);
+            CursorCurrentY = Mathf.RoundToInt(grid.GetNearestPointOnGrid(position).y);
+            CursorVisual.transform.position = new Vector3(CursorCurrentX, CursorCurrentY);
         }
     }
 }

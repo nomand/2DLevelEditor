@@ -11,18 +11,18 @@ namespace Runningtap
 
         private void Start()
         {
-            CreateCoordingates(Grid.resolution);
+            CreateEmptyCoordingates(Grid.Resolution, Grid.Resolution);
         }
 
-        void CreateCoordingates(int resolution)
+        public void CreateEmptyCoordingates(int x, int y)
         {
-            xy = new GameObject[resolution][];
+            xy = new GameObject[x][];
 
-            for (int xi = 0; xi < resolution; xi++)
+            for (int xi = 0; xi < x; xi++)
             {
-                xy[xi] = new GameObject[resolution];
+                xy[xi] = new GameObject[y];
 
-                for (int yi = 0; yi < resolution; yi++)
+                for (int yi = 0; yi < y; yi++)
                 {
                     xy[xi][yi] = null;
                 }
