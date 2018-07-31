@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 namespace Runningtap
 {
@@ -8,6 +9,8 @@ namespace Runningtap
     {
         public GameObject[][] xy;
         public LevelGrid Grid;
+
+        private static string gameDataProjectFilePath = "/Runningtap/2DLevelEditor/StreamingAssets/LevelData.json";
 
         private void Start()
         {
@@ -27,6 +30,13 @@ namespace Runningtap
                     xy[xi][yi] = null;
                 }
             }
+        }
+
+        public void SaveData()
+        {
+            string dataAsJson = JsonUtility.ToJson(this.xy, true);
+            string filePath = Application.dataPath + gameDataProjectFilePath;
+            File.WriteAllText(filePath, dataAsJson);
         }
     }
 }
